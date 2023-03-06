@@ -77,9 +77,9 @@ def create_max_min_report_response(values):
     :param values: The values that were received as part of the request.
     """
     response_dict = {
-        "maxTemp": max_temp,
-        "minTemp": min_temp,
-        "avgTemp": sum(avg_temp_list) / moving_window_size,
+        "maxGlucoseLevel": max_temp,
+        "minGlucoseLevel": min_temp,
+        "avgGlucoseLevel": sum(avg_temp_list) / moving_window_size,
         "startTime": (datetime.now() - timedelta(0, moving_window_size * 8)).isoformat(),
         "endTime": datetime.now().isoformat(),
     }
