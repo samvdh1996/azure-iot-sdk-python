@@ -20,6 +20,7 @@ logging.basicConfig(level=logging.ERROR)
 # This id can change according to the company the user is from
 # and the name user wants to call this Plug and Play device
 model_id = "dtmi:com:example:Thermostat;1"
+model_id = "dtmi:continuousPatientMonitoringK8261qgcvv:PersonalDeviceManager_vn;1"
 
 #####################################################
 # GLOBAL THERMOSTAT VARIABLES
@@ -293,7 +294,7 @@ async def main():
         current_avg_idx = 0
 
         while True:
-            current_temp = random.gauss(90, 10)  # Current temperature in Celsius
+            current_temp = int(random.gauss(90, 10))  # Current temperature in Celsius
             if not max_temp:
                 max_temp = current_temp
             elif current_temp > max_temp:
