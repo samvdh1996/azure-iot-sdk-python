@@ -20,7 +20,6 @@ logging.basicConfig(level=logging.ERROR)
 # This id can change according to the company the user is from
 # and the name user wants to call this Plug and Play device
 model_id = "dtmi:com:example:Thermostat;1"
-model_id = "dtmi:continuousPatientMonitoringK8261qgcvv:PersonalDeviceManager_vn;1"
 
 #####################################################
 # GLOBAL THERMOSTAT VARIABLES
@@ -308,7 +307,7 @@ async def main():
             avg_temp_list[current_avg_idx] = current_temp
             current_avg_idx = (current_avg_idx + 1) % moving_window_size
 
-            BGL = {"Blood Glucose Level": current_temp}
+            BGL = {"bloodGlucoseLevel": current_temp}
 
             await send_telemetry_from_thermostat(device_client, BGL)
             await asyncio.sleep(8)
