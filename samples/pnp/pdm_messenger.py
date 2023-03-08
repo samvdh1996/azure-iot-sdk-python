@@ -48,14 +48,14 @@ async def reboot_handler(values):
     for idx in range(len(avg_temp_list)):
         avg_temp_list[idx] = 0
     target_temperature = None
-    print("maxTemp {}, minTemp {}".format(max_temp, min_temp))
+    print("maxCGM {}, minCGM {}".format(max_temp, min_temp))
     print("Done rebooting")
 
 
 async def max_min_handler(values):
     if values:
         print(
-            "Will return the max, min and average temperature from the specified time {since} to the current time".format(
+            "Will return the max, min and average CGM levels from the specified time {since} to the current time".format(
                 since=values
             )
         )
