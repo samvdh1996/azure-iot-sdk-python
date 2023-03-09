@@ -310,7 +310,7 @@ async def main():
             BGL = {"bloodGlucoseLevel": current_temp}
 
             await send_telemetry_from_thermostat(device_client, BGL)
-            await asyncio.sleep(8)
+            await asyncio.sleep(1)
 
     send_telemetry_task = asyncio.create_task(send_telemetry())
 
