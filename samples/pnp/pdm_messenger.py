@@ -28,6 +28,10 @@ min_temp = None
 avg_temp_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 moving_window_size = len(avg_temp_list)
 target_temperature = None
+age = 25
+user_name = "Sam van der Heijden"
+device_type = "Iphone 12"
+OS = "IOS 13.5"
 
 
 #####################################################
@@ -40,11 +44,20 @@ async def reboot_handler(values):
     global min_temp
     global avg_temp_list
     global target_temperature
+    global age
+    global user_name
+    global device_type
+    global os
+
     if values and type(values) == int:
         print("Rebooting after delay of {delay} secs".format(delay=values))
         asyncio.sleep(values)
     max_temp = None
     min_temp = None
+    age = None
+    user_name = None
+    device_type = None
+    os = None
     for idx in range(len(avg_temp_list)):
         avg_temp_list[idx] = 0
     target_temperature = None
@@ -82,6 +95,22 @@ def create_max_min_report_response(values):
         "avgGlucoseLevel": sum(avg_temp_list) / moving_window_size,
         "startTime": (datetime.now() - timedelta(0, moving_window_size * 8)).isoformat(),
         "endTime": datetime.now().isoformat(),
+    }
+    # serialize response dictionary into a JSON formatted str
+    response_payload = json.dumps(response_dict, default=lambda o: o.__dict__, sort_keys=True)
+    print(response_payload)
+    return response_payload
+
+def get_device_settings(values):
+    """
+    An extra function that gives the settings of the device
+    """
+    response_dict = {
+        "user": user_name,
+        "age": age,
+        "deviceType": device_type,
+        "OS": os,
+        "time": datetime.now().isoformat(),
     }
     # serialize response dictionary into a JSON formatted str
     response_payload = json.dumps(response_dict, default=lambda o: o.__dict__, sort_keys=True)
@@ -279,6 +308,11 @@ async def main():
             method_name="getMaxMinReport",
             user_command_handler=max_min_handler,
             create_user_response_handler=create_max_min_report_response,
+        ),
+        execute_command_listener(
+            device_client,
+            method_name="getDeviceSetting",
+            create_user_response_handler=get_device_settings,
         ),
         execute_property_listener(device_client),
     )
