@@ -111,6 +111,7 @@ def get_device_settings(values):
     """
     An extra function that gives the settings of the device
     """
+    print("function started")
     response_dict = {
         "user": user_name,
         "age": age,
