@@ -74,6 +74,12 @@ async def max_min_handler(values):
         )
     print("Done generating")
 
+async def device_settings_handler(values):
+    if values:
+        print(
+            "Will return the current device settings"
+            )
+    print("Done generating")
 
 # END COMMAND HANDLERS
 #####################################################
@@ -116,7 +122,6 @@ def get_device_settings(values):
     response_payload = json.dumps(response_dict, default=lambda o: o.__dict__, sort_keys=True)
     print(response_payload)
     return response_payload
-
 
 def create_reboot_response(values):
     response = {"result": True, "data": "reboot succeeded"}
@@ -312,6 +317,7 @@ async def main():
         execute_command_listener(
             device_client,
             method_name="getDeviceSetting",
+            user_command_handler=device_settings_handler,
             create_user_response_handler=get_device_settings,
         ),
         execute_property_listener(device_client),
