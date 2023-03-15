@@ -75,11 +75,9 @@ async def max_min_handler(values):
     print("Done generating")
 
 async def device_settings_handler(values):
-    if values:
-        print(
-            "Will return the current device settings"
-            )
-    print("Done generating")
+    print(
+        "Will return the current device settings"
+        )
 
 # END COMMAND HANDLERS
 #####################################################
