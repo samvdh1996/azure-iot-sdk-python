@@ -293,8 +293,8 @@ async def main():
     ################################################
     # Set and read desired property (target temperature)
 
-    max_temp = 100  # Initial Max Temp otherwise will not pass certification
-    await device_client.patch_twin_reported_properties({"maxTempSinceLastReboot": max_temp})
+    desired_cgm = 94  # Initial Max Temp otherwise will not pass certification
+    await device_client.patch_twin_reported_properties({"username": "Sam van der Heijden", "birthday": "13-11-1996"})
 
     ################################################
     # Register callback and Handle command (reboot)
